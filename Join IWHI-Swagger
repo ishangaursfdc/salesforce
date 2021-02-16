@@ -1,0 +1,1352 @@
+openapi: 3.0.1
+info:
+  title: Join API
+  version: v1.0
+servers:
+  - url: /
+paths:
+  /join:
+    post:
+      tags:
+        - Join
+      operationId: Join_Post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JoinResponse'
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualJoinResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: false
+      x-codegen-request-body-name: joinDetails
+  /v2/join/ishi:
+    post:
+      tags:
+        - Join
+      description: Join endpoint for OSHC
+      operationId: Join_Post_Oshc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinRequestISHI'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/JoinRequestISHI'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JoinResponseISHI'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/JoinResponseISHI'
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualJoinResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ManualJoinResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: false
+      x-codegen-request-body-name: joinDetails
+  /v2/join/iwhi:
+    post:
+      tags:
+        - Join
+      description: Join endpoint for IWHI
+      operationId: Join_Post_Iwhi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JoinRequestIWHI'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/JoinRequestIWHI'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JoinResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/JoinResponse'
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ManualJoinResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ManualJoinResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: false
+      x-codegen-request-body-name: joinDetails
+  /previous-funds:
+    get:
+      tags:
+        - PreviousFund
+      description: Lists the previous fund codes and names that are available for enrolment into WHICS.
+      operationId: PreviousFund_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviousFundResponse'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviousFundResponse'
+      deprecated: false
+  /previous-funds/iwhi:
+    get:
+      tags:
+        - PreviousFund
+      description: Lists the previous IWHI fund codes and names that are available for enrolment into WHICS.
+      operationId: PreviousFundIwhi_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviousFundResponse'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PreviousFundResponse'
+      deprecated: false
+  /retrieve:
+    get:
+      tags:
+        - Retrieve
+      description: Retrieves a request based on the provided corelation-id (id) from dynamodb.
+      operationId: Retrieve_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RetrieveResponse'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RetrieveResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: false
+  /education-institutions:
+    get:
+      tags:
+        - EducationInstitutions
+      description: Retrieves a list of all education institutions.
+      operationId: EducationInstitutions_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EducationInstitutionsResponse'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EducationInstitutionsResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: false
+  /financial-institutions:
+    get:
+      tags:
+        - FinancialInstitutions
+      description: Retrieves a list of financial institutions or based on the provided BSB.
+      operationId: FinancialInstitutions_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FinancialInstitutionsResponse'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FinancialInstitutionsResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      deprecated: false
+  /public-key:
+    get:
+      tags:
+        - Encryption
+      description: Retrieves the public-key to be used by consumers for encrypting credit card information
+      operationId: PublicKey_Get
+      responses:
+        '200':
+          description: OK
+          content: {}
+components:
+  schemas:
+    Error400:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error400Item'
+    Error400Item:
+      type: object
+      properties:
+        property:
+          type: string
+        message:
+          type: string
+    Error:
+      type: object
+      properties:
+        Message:
+          type: string
+    ManualJoinResponse:
+      type: object
+      properties:
+        JoinId:
+          type: string
+        Message:
+          type: string
+        Error:
+          type: string
+    JoinRequest:
+      required:
+        - Agreements
+        - ContactDetails
+        - FinancialDetails
+        - GovernmentDetails
+        - PersonalDetails
+        - ProductSelection
+        - SourceChannel
+      type: object
+      properties:
+        ProductSelection:
+          $ref: '#/components/schemas/ProductSelection'
+        OfferDetails:
+          $ref: '#/components/schemas/OfferDetails'
+        FinancialDetails:
+          $ref: '#/components/schemas/FinancialDetails'
+        GovernmentDetails:
+          $ref: '#/components/schemas/GovernmentDetails'
+        PersonalDetails:
+          $ref: '#/components/schemas/PersonalDetails'
+        ContactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        Agreements:
+          $ref: '#/components/schemas/Agreements'
+        SourceChannel:
+          $ref: '#/components/schemas/SourceChannel'
+        ProspectId:
+          type: string
+          description: Prospect identifier for joins that have resumed a quote
+        QuoteId:
+          type: string
+          description: Quote identifier for joins that have resumed a quote
+    JoinRequestISHI:
+      required:
+        - Agreements
+        - ContactDetails
+        - FinancialDetails
+        - GovernmentDetails
+        - PersonalDetails
+        - ProductSelection
+      type: object
+      properties:
+        ProductSelection:
+          $ref: '#/components/schemas/ProductSelectionISHI'
+        Agreements:
+          $ref: '#/components/schemas/Agreements'
+        ContactDetails:
+          $ref: '#/components/schemas/ContactDetails'
+        GovernmentDetails:
+          $ref: '#/components/schemas/GovernmentDetailsISHI'
+        VisaDetails:
+          $ref: '#/components/schemas/VisaDetailsISHI'
+        FinancialDetails:
+          $ref: '#/components/schemas/FinancialDetailsISHI'
+        PersonalDetails:
+          $ref: '#/components/schemas/PersonalDetailsISHI'
+        SourceChannel:
+          $ref: '#/components/schemas/SourceChannelISHI'
+        EnrolSource:
+          $ref: '#/components/schemas/EnrolSource'
+    JoinRequestIWHI:
+      required:
+        - Agreements
+        - ContactDetails
+        - FinancialDetails
+        - PersonalDetails
+        - ProductSelection
+        - preExistingCondition
+      type: object
+      properties:
+        ProductSelection:
+          $ref: '#/components/schemas/ProductSelectionIWHI'
+        Company:
+          $ref: '#/components/schemas/Company'
+        PersonalDetails:
+          $ref: '#/components/schemas/PersonalDetailsIWHI'
+        FinancialDetails:
+          $ref: '#/components/schemas/FinancialDetailsIWHI'
+        ContactDetails:
+          $ref: '#/components/schemas/ContactDetailsIWHI'
+        OfferDetails:
+          $ref: '#/components/schemas/OfferDetails'
+        Agreements:
+          $ref: '#/components/schemas/Agreements'
+        SourceChannel:
+          $ref: '#/components/schemas/SourceChannelIWHI'
+        agentNumber:
+          $ref: '#/components/schemas/AgentNumber'
+        VisaDetails:
+          $ref: '#/components/schemas/VisaDetailsIWHI'
+        preExistingCondition:
+          $ref: '#/components/schemas/PreExistingConditionIWHI'
+    ProductSelection:
+      anyOf:
+        - $ref: '#/components/schemas/HospitalProduct'
+        - $ref: '#/components/schemas/ExtrasProduct'
+        - $ref: '#/components/schemas/CombinedProduct'
+    ProductSelectionIWHI:
+      $ref: '#/components/schemas/HospitalProductIWHI'
+    ProductSelectionISHI:
+      $ref: '#/components/schemas/HospitalProductISHI'
+    PaymentDetails:
+      oneOf:
+        - $ref: '#/components/schemas/BankAccountDetails'
+        - $ref: '#/components/schemas/BraintreeDetails'
+        - $ref: '#/components/schemas/CreditCardDetails'
+    FinancialDetails:
+      required:
+        - CoverStartDate
+        - PaymentFrequency
+        - PaymentMethod
+        - PaymentStartDate
+      example:
+        PaymentFrequency: Weekly
+        PaymentMethod: Braintree
+        PaymentStartDate: '2000-01-01'
+        CoverStartDate: '2000-01-01'
+        Rate: '0'
+        BraintreeDetails:
+          Nonce: someNonce
+      allOf:
+        - $ref: '#/components/schemas/PaymentDetails'
+        - type: object
+          properties:
+            PaymentFrequency:
+              type: string
+              example: Weekly
+              enum:
+                - Weekly
+                - Fortnightly
+                - Monthly
+                - Quarterly
+                - HalfYearly
+                - Yearly
+            PaymentMethod:
+              type: string
+              example: Braintree
+              enum:
+                - DirectDebit
+                - CreditCard
+                - Braintree
+            DirectCreditDetails:
+              $ref: '#/components/schemas/DirectCreditDetails'
+            PaymentStartDate:
+              type: string
+              description: Date in ISO-8601 format
+              format: date
+            CoverStartDate:
+              type: string
+              description: Date in ISO-8601 format
+              format: date
+            HasRequestedPointsPayment:
+              type: boolean
+              example: false
+            Rate:
+              type: string
+              example: '0'
+    FinancialDetailsIWHI:
+      required:
+        - CoverStartDate
+        - PaymentFrequency
+        - PaymentMethod
+      example:
+        PaymentMethod: Braintree
+        CoverStartDate: '2000-01-01'
+        CoverEndDate: '2004-01-01'
+        BraintreeDetails:
+          Nonce: someNonce
+      allOf:
+        - $ref: '#/components/schemas/BraintreeDetails'
+        - type: object
+          properties:
+            PaymentMethod:
+              type: string
+              example: Braintree
+              enum:
+                - DirectDebit
+                - CreditCard
+                - Braintree
+            CoverStartDate:
+              type: string
+              description: Date in ISO-8601 format
+              format: date
+            CoverEndDate:
+              type: string
+              description: Date in ISO-8601 format
+              format: date
+    FinancialDetailsISHI:
+      required:
+        - CoverStartDate
+        - PaymentFrequency
+        - PaymentMethod
+      example:
+        PaymentMethod: Braintree
+        CoverStartDate: '2000-01-01'
+        CoverEndDate: '2004-01-01'
+        BraintreeDetails:
+          Nonce: someNonce
+      allOf:
+        - $ref: '#/components/schemas/BraintreeDetails'
+        - type: object
+          properties:
+            PaymentMethod:
+              type: string
+              example: Braintree
+              enum:
+                - DirectDebit
+                - CreditCard
+                - Braintree
+            CoverStartDate:
+              type: string
+              description: Date in ISO-8601 format
+              format: date
+            CoverEndDate:
+              type: string
+              description: Date in ISO-8601 format
+              format: date
+    OfferDetails:
+      type: object
+      properties:
+        offerId:
+          type: number
+          example: 456
+        PromoCode:
+          type: string
+          example: '789'
+        CampaignId:
+          type: string
+          example: '123'
+    GovernmentDetails:
+      required:
+        - ApplyGovernmentRebate
+        - GovernmentRebateAcknowledgement
+        - MedicareExpiry
+        - MedicareNumber
+        - PolicyHolderPreviousFundDetails
+      type: object
+      properties:
+        ApplyGovernmentRebate:
+          type: boolean
+          example: true
+        IncomeTier:
+          type: string
+          example: Tier0
+          enum:
+            - Tier0
+            - Tier1
+            - Tier2
+            - Tier3
+        GovernmentRebateAcknowledgement:
+          $ref: '#/components/schemas/GovernmentRebateAcknowledgement'
+        PolicyHolderPreviousFundDetails:
+          $ref: '#/components/schemas/PreviousFundDetails'
+        PartnerPreviousFundDetails:
+          $ref: '#/components/schemas/PreviousFundDetails'
+        MedicareNumber:
+          type: string
+          example: '4310704696'
+        MedicareExpiry:
+          type: string
+          format: date
+    GovernmentDetailsISHI:
+      required:
+        - PolicyHolderPreviousFundDetails
+      type: object
+      properties:
+        PolicyHolderPreviousFundDetails:
+          $ref: '#/components/schemas/PreviousFundDetailsISHI'
+    PersonalDetails:
+      required:
+        - PolicyHolder
+        - Scale
+      type: object
+      properties:
+        Scale:
+          type: string
+          enum:
+            - Single
+            - Couple
+            - Family
+            - SingleParentFamily
+          example: Family
+        PolicyHolder:
+          $ref: '#/components/schemas/PolicyHolder'
+        Partner:
+          $ref: '#/components/schemas/PersonWithEmail'
+        Dependants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+    PersonalDetailsISHI:
+      required:
+        - PolicyHolder
+        - Scale
+      type: object
+      properties:
+        IsTheApplicantCurrentlyInAustralia:
+          $ref: '#/components/schemas/IsTheApplicantCurrentlyInAustralia'
+        Scale:
+          type: string
+          enum:
+            - Single
+            - Couple
+            - Family
+          example: Family
+        CitizenshipCountry:
+          $ref: '#/components/schemas/CitizenshipCountry'
+        PolicyHolder:
+          $ref: '#/components/schemas/PolicyHolder'
+        Partner:
+          $ref: '#/components/schemas/PersonWithEmail'
+        Dependants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+    PersonalDetailsIWHI:
+      required:
+        - PolicyHolder
+        - Scale
+      type: object
+      properties:
+        Scale:
+          type: string
+          enum:
+            - Single
+            - Couple
+            - Family
+            - SingleParentFamily
+          example: Family
+        PolicyHolder:
+          $ref: '#/components/schemas/PolicyHolder'
+        CitizenshipCountry:
+          $ref: '#/components/schemas/CitizenshipCountry'
+        Partner:
+          $ref: '#/components/schemas/PersonWithEmail'
+        Dependants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+    Agreements:
+      required:
+        - HasAcceptedDirectDebitServiceAgreement
+        - HasAgreedToFundRules
+      type: object
+      properties:
+        HasAgreedToFundRules:
+          type: boolean
+          example: true
+        HasAcceptedDirectDebitServiceAgreement:
+          type: boolean
+          example: true
+    SourceChannel:
+      type: string
+      description: Source indetifier for joins to know where they have come from
+      example: NibWeb
+    SourceChannelISHI:
+      type: string
+      description: Source indetifier for joins to know where they have come from
+      example: NISS
+    SourceChannelIWHI:
+      type: string
+      description: Source indetifier for joins to know where they have come from
+      example: Iman
+    AgentNumber:
+      type: string
+    EnrolSource:
+      type: string
+      description: IAP agent source identifier for joins
+    CitizenshipCountry:
+      type: string
+      example: AFG
+    IsTheApplicantCurrentlyInAustralia:
+      type: boolean
+    Company:
+      required:
+        - code
+        - group
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          example: Test
+        code:
+          type: string
+          example: Test
+        group:
+          type: string
+          example: '93003'
+        section:
+          type: string
+          example: '900'
+        rateCode:
+          type: string
+          example: '0'
+        payroll:
+          type: string
+          example: payroll
+    ContactDetails:
+      required:
+        - Address
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/Address'
+        PostalAddress:
+          $ref: '#/components/schemas/Address'
+        HomePhone:
+          type: string
+          example: 0212345678
+        WorkPhone:
+          type: string
+          example: 0212345678
+        MobilePhone:
+          type: string
+          example: 0412345678
+    ContactDetailsIWHI:
+      required:
+        - Address
+      type: object
+      properties:
+        Address:
+          $ref: '#/components/schemas/AddressIWHI'
+        PostalAddress:
+          $ref: '#/components/schemas/Address'
+        HomePhone:
+          type: string
+          example: 0212345678
+        WorkPhone:
+          type: string
+          example: 0212345678
+        MobilePhone:
+          type: string
+          example: 0412345678
+    HospitalProduct:
+      required:
+        - Excess
+        - Id
+      type: object
+      properties:
+        Hospital:
+          type: object
+          properties:
+            Id:
+              type: string
+              example: '54'
+            Excess:
+              type: integer
+              format: int32
+              example: 500
+          description: 'Either HospitalProduct and/or ExtrasProduct, or a CombinedProduct by itself. You cannot specify both a Combined and Hospital/Extras product.'
+    HospitalProductIWHI:
+      type: object
+      properties:
+        Hospital:
+          required:
+            - Id
+          type: object
+          properties:
+            Id:
+              type: string
+              example: '181'
+          description: Hospital product code id
+    HospitalProductISHI:
+      type: object
+      properties:
+        Hospital:
+          required:
+            - id
+          type: object
+          properties:
+            id:
+              type: string
+              example: '181'
+          description: Hospital product code id
+    ExtrasProduct:
+      type: object
+      properties:
+        Extras:
+          type: object
+          properties:
+            Extras:
+              required:
+                - Id
+              type: object
+              properties:
+                Id:
+                  type: string
+                  example: '176'
+              description: 'Either HospitalProduct and/or ExtrasProduct, or a CombinedProduct by itself. You cannot specify both a Combined and Hospital/Extras product.'
+    CombinedProduct:
+      type: object
+      properties:
+        Combined:
+          required:
+            - Excess
+            - Id
+          type: object
+          properties:
+            Id:
+              type: string
+            Excess:
+              type: integer
+              format: int32
+          description: 'Either HospitalProduct and/or ExtrasProduct, or a CombinedProduct by itself. You cannot specify both a Combined and Hospital/Extras product.'
+    DirectCreditDetails:
+      required:
+        - AccountName
+        - AccountNumber
+        - BSB
+      type: object
+      properties:
+        BSB:
+          type: string
+        AccountNumber:
+          type: string
+        AccountName:
+          type: string
+      description: Optional field to allow customers to set a separate bank account for payment of claims.
+    BankAccountDetails:
+      type: object
+      properties:
+        BankAccountDetails:
+          required:
+            - AccountName
+            - AccountNumber
+            - BSB
+          type: object
+          properties:
+            BSB:
+              type: string
+            AccountNumber:
+              type: string
+            AccountName:
+              type: string
+          description: Either BankAccountDetails or CreditCardDetails or BraintreeDetails are required.
+    BraintreeDetails:
+      type: object
+      properties:
+        BraintreeDetails:
+          type: object
+          properties:
+            Nonce:
+              type: string
+              description: Either Token or Nonce are required
+              example: fake-valid-nonce
+            PaymentMethodToken:
+              type: string
+              description: Either Token or Nonce are required
+              example: fake_token
+          description: 'Either BankAccountDetails, CreditCardDetails or BraintreeDetails are required.'
+    CreditCardDetails:
+      type: object
+      properties:
+        CreditCardDetails:
+          required:
+            - Expiry
+            - Name
+            - Number
+          type: object
+          properties:
+            Name:
+              type: string
+            Number:
+              type: string
+            Expiry:
+              type: string
+              format: date
+          description: 'Either BankAccountDetails, CreditCardDetails or BraintreeDetails are required.'
+    PreviousFundDetails:
+      required:
+        - Description
+        - PreviouslyHadHealthInsurance
+      type: object
+      properties:
+        PreviouslyHadHealthInsurance:
+          type: boolean
+        Code:
+          type: string
+          description: Code is described in /previous-funds endpoint
+          example: MP
+        Description:
+          type: string
+          description: Name of previous health fund
+          example: Medibank Private
+        PolicyNumber:
+          type: string
+        ageBasedDiscountAssessmentDate:
+          type: string
+          description: Date in ISO-8601 format
+          format: date
+    PreviousFundDetailsISHI:
+      required:
+        - PreviouslyHadHealthInsurance
+      type: object
+      properties:
+        PreviouslyHadHealthInsurance:
+          type: boolean
+        Code:
+          type: string
+          description: Customer previous health fund code
+        PolicyNumber:
+          type: string
+          description: Customer previous health fund number
+    PolicyHolder:
+      required:
+        - DateOfBirth
+        - Email
+        - FirstName
+        - Gender
+        - LastName
+        - Title
+      type: object
+      properties:
+        Email:
+          type: string
+          example: a@a.com
+        Title:
+          type: string
+          enum:
+            - Mr
+            - Mrs
+            - Miss
+            - Ms
+            - Mx
+            - Dr
+            - Prof
+            - Sr
+            - Rev
+            - Father
+            - Brother
+            - Bishop
+            - Sir
+            - Lady
+            - Captain
+            - Colonel
+            - Major
+            - Lord
+        DateOfBirth:
+          type: string
+          format: date
+          example: '2004-01-01'
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        ExternalId:
+          type: string
+          example: '123456789'
+    PersonWithEmail:
+      required:
+        - DateOfBirth
+        - FirstName
+        - Gender
+        - LastName
+        - Title
+      type: object
+      properties:
+        Email:
+          type: string
+          example: a@a.com
+        Title:
+          type: string
+          enum:
+            - Mr
+            - Mrs
+            - Miss
+            - Ms
+            - Mx
+            - Dr
+            - Prof
+            - Sr
+            - Rev
+            - Father
+            - Brother
+            - Bishop
+            - Sir
+            - Lady
+            - Captain
+            - Colonel
+            - Major
+            - Lord
+        DateOfBirth:
+          type: string
+          format: date
+          example: '2004-01-01'
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        ExternalId:
+          type: string
+    Person:
+      required:
+        - DateOfBirth
+        - FirstName
+        - Gender
+        - LastName
+        - Title
+      type: object
+      properties:
+        Title:
+          type: string
+          enum:
+            - Mr
+            - Mrs
+            - Miss
+            - Ms
+            - Mx
+            - Dr
+            - Prof
+            - Sr
+            - Rev
+            - Father
+            - Brother
+            - Bishop
+            - Sir
+            - Lady
+            - Captain
+            - Colonel
+            - Major
+            - Lord
+        DateOfBirth:
+          type: string
+          format: date
+          example: '2004-01-01'
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        Gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        ExternalId:
+          type: string
+    Address:
+      required:
+        - AddressLine
+        - Postcode
+        - State
+        - Suburb
+      type: object
+      properties:
+        AddressLine:
+          type: string
+          example: 5 Finland st
+        Suburb:
+          type: string
+          example: Newcastle
+        State:
+          type: string
+          example: NSW
+          enum:
+            - NSW
+            - QLD
+            - TAS
+            - NT
+            - VIC
+            - SA
+            - WA
+            - ACT
+        Postcode:
+          type: string
+          example: '2322'
+    AddressIWHI:
+      required:
+        - AddressLine
+        - Postcode
+        - State
+        - Suburb
+      type: object
+      properties:
+        AddressLine:
+          type: string
+          example: 5 Finland st
+        AddressLine2:
+          type: string
+          example: 5 Somewhere st
+        Suburb:
+          type: string
+          example: Newcastle
+        State:
+          type: string
+          example: NSW
+          enum:
+            - NSW
+            - QLD
+            - TAS
+            - NT
+            - VIC
+            - SA
+            - WA
+            - ACT
+        Postcode:
+          type: string
+          example: '2322'
+    VisaDetailsISHI:
+      required:
+        - educationInstitute
+        - passportNumber
+      type: object
+      properties:
+        educationInstitute:
+          type: string
+          example: AAHD
+        passportNumber:
+          type: string
+    VisaDetailsIWHI:
+      required:
+        - visaSubclass
+      type: object
+      properties:
+        visaSubclass:
+          type: string
+          example: '457'
+        expectedVisaEndDate:
+          type: string
+          format: date
+    PreExistingConditionIWHI:
+      required:
+        - hasPreExistingConditions
+      type: object
+      properties:
+        hasPreExistingConditions:
+          type: boolean
+          example: false
+    JoinResponse:
+      type: object
+      properties:
+        JoinId:
+          type: string
+        PolicyNumber:
+          type: string
+        Customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomersResponse'
+        PaymentDetails:
+          $ref: '#/components/schemas/PaymentDetailsResponse'
+    JoinResponseISHI:
+      type: object
+      properties:
+        JoinId:
+          type: string
+        PolicyNumber:
+          type: string
+    CustomersResponse:
+      type: object
+      properties:
+        Title:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        DateOfBirth:
+          type: string
+          description: Date in ISO-8601 format
+          format: date
+        Gender:
+          type: string
+          enum:
+            - Male
+            - Female
+        CustomerNumber:
+          type: string
+        ExternalId:
+          type: string
+    PaymentDetailsResponse:
+      type: object
+      properties:
+        FirstPaymentAmount:
+          type: number
+          format: double
+        FirstPaymentDate:
+          type: string
+          format: date
+        RecurringPaymentAmount:
+          type: number
+          format: double
+        NextPaymentDate:
+          type: string
+          format: date
+    PreviousFundResponse:
+      type: object
+      properties:
+        Code:
+          type: string
+        Name:
+          type: string
+    RetrieveResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/RetrieveItemResponse'
+    RetrieveItemResponse:
+      required:
+        - correlation_id
+        - creation_time
+        - header_information
+        - request_data
+      type: object
+      properties:
+        creation_time:
+          type: string
+        correlation_id:
+          type: string
+        request_data:
+          $ref: '#/components/schemas/JoinRequest'
+        header_information:
+          $ref: '#/components/schemas/HeaderInformation'
+    EducationInstitutionsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/EduInstItemResponse'
+    EduInstItemResponse:
+      required:
+        - Code
+        - CodeDescription
+        - CodePrefixOut
+        - CodeXCheck
+      type: object
+      properties:
+        Code:
+          type: string
+        CodeDescription:
+          type: string
+        CodePrefixOut:
+          type: string
+        CodeXCheck:
+          type: string
+    FinancialInstitutionsResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/FinInstItemResponse'
+    FinInstItemResponse:
+      required:
+        - Code
+        - Name
+      type: object
+      properties:
+        Code:
+          type: string
+        Name:
+          type: string
+    HeaderInformation:
+      type: object
+      properties:
+        content-type:
+          type: string
+        accept:
+          type: string
+        host:
+          type: string
+    GovernmentRebateAcknowledgement:
+      type: object
+      properties:
+        AreYouCoveredByThisPolicy:
+          type: boolean
+        AreAllPeopleOnPolicyEntitledToMedicare:
+          type: boolean
+        DeclarationAllDetailsCorrect:
+          type: boolean
+        DeclarationDate:
+          type: string
+          format: date
+      description: Optional object to allow for the sighting of rebate forms. Omit this if the rebate has not been sighted.
